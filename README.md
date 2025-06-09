@@ -48,7 +48,7 @@
 ---
 
 ## 🗂️ Folder Structure
-
+<pre>
 ```
 
 MCBS/
@@ -90,7 +90,7 @@ MCBS/
 └── ...       # Project file
 
 ````
-
+</pre>
 ---
 
 ## 🛠️ Setup Instructions
