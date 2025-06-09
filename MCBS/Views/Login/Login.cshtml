@@ -1,0 +1,161 @@
+﻿@model MCBS.Models.LoginModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+<link href="~/css/login.css" rel="stylesheet" />
+
+
+<div class="mcbs-login-container">
+    <!-- Banking theme background elements -->
+    <div class="banking-theme-bg">
+        <div class="coin" style="top: 10%; left: 5%;">₹</div>
+        <div class="coin" style="top: 30%; right: 8%;">₹</div>
+        <div class="coin" style="bottom: 20%; left: 7%;">₹</div>
+        <div class="coin" style="bottom: 40%; right: 5%;">₹</div>
+    </div>
+    
+    <div class="mcbs-login-card">
+        <div class="mcbs-login-header">
+            <div class="mcbs-logo">
+                <h2><i class="fas fa-university bank-icon"></i> MCBS Login</h2>
+            </div>
+            <p class="mcbs-welcome-text">Welcome back! Please login to your account</p>
+        </div>
+
+        @if (ViewBag.Message != null)
+        {
+            <div class="mcbs-alert mcbs-alert-error">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                </svg>
+                <span>@ViewBag.Message</span>
+            </div>
+        }
+
+        @if (TempData["LoginMessage"] != null)
+        {
+             <div class="mcbs-alert mcbs-alert-success">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+        </svg>
+        <span>@TempData["LoginMessage"]</span>
+        <div class="redirect-message">Redirecting to your dashboard...</div>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+            
+    @section scripts{
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+            const progress = document.querySelector('.loading-progress');
+            progress.style.width = "100%";
+
+            setTimeout(function () {
+                window.location.href = '@Url.Action("Index", "Home")';
+            }, 1000); // 3-second delay
+        });
+            </script>
+        }
+      }
+        <form asp-action="Login" method="post" class="mcbs-login-form">
+                <div class="mcbs-form-group">
+        <label asp-for="AccountNumber" class="mcbs-input-label">Account Number</label>
+        <div class="mcbs-input-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="mcbs-input-icon">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    </svg>
+            <input asp-for="AccountNumber" class="mcbs-form-input" placeholder="Enter your Account Number" />
+        </div>
+        <span asp-validation-for="AccountNumber" class="mcbs-validation-error"></span>
+    </div>
+
+                <div class="mcbs-form-group">
+        <label asp-for="DateOfBirth" class="mcbs-input-label">Date of Birth</label>
+        <div class="mcbs-input-container">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="mcbs-input-icon">
+      <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-2 .89-2 2v14c0 
+               1.11.89 2 2 2h14c1.11 0 2-.89 
+               2-2V6c0-1.11-.89-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/>
+    </svg>
+            <input asp-for="DateOfBirth" class="mcbs-form-input" type="date" />
+        </div>
+        <span asp-validation-for="DateOfBirth" class="mcbs-validation-error"></span>
+    </div>
+            @* <div class="mcbs-form-options">
+                <div class="mcbs-remember-me">
+                    <input type="checkbox" id="mcbs-remember-check" />
+                    <label for="mcbs-remember-check">Remember me</label>
+                </div>
+                <a href="#" class="mcbs-forgot-password">Forgot password?</a>
+            </div> *@
+
+            <button type="submit" class="mcbs-login-button">
+                <span class="mcbs-button-text">Login</span>
+                <div class="mcbs-button-loader">
+                    <div class="mcbs-loader-dot"></div>
+                    <div class="mcbs-loader-dot"></div>
+                    <div class="mcbs-loader-dot"></div>
+                </div>
+            </button>
+        </form>
+
+        <div class="mcbs-signup-link">
+            Don't have an account? <a asp-controller="Login" asp-action="Register">Sign Up</a>
+        </div>
+    </div>
+</div>
+
+<partial name="_ValidationScriptsPartial" />
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Password toggle functionality
+        const passwordInput = document.getElementById('mcbs-password-input');
+        const togglePassword = document.getElementById('mcbs-toggle-password');
+        const eyeIcon = togglePassword.querySelector('.mcbs-eye-icon');
+
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // Toggle eye icon
+            if (type === 'text') {
+                eyeIcon.setAttribute('viewBox', '0 0 24 24');
+                eyeIcon.innerHTML = '<path d="M12 6.5c2.76 0 5 2.24 5 5 0 .51-.1 1-.24 1.46l3.06 3.06c1.39-1.23 2.49-2.77 3.18-4.53C21.27 7.11 17 4 12 4c-1.27 0-2.49.2-3.64.57l2.17 2.17c.47-.14.96-.24 1.47-.24zM2.71 3.16c-.39.39-.39 1.02 0 1.41l1.97 1.97C3.06 7.83 1.77 9.53 1 11.5 2.73 15.89 7 19 12 19c1.52 0 2.97-.3 4.31-.82l2.72 2.72c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L4.13 3.16c-.39-.39-1.03-.39-1.42 0zM12 16.5c-2.76 0-5-2.24-5-5 0-.77.18-1.5.49-2.14l1.57 1.57c-.03.18-.06.37-.06.57 0 1.66 1.34 3 3 3 .2 0 .38-.03.57-.07L14.14 16c-.64.32-1.37.5-2.14.5zm2.97-5.33c-.15-1.4-1.25-2.49-2.64-2.64l2.64 2.64z"/>';
+            } else {
+                eyeIcon.setAttribute('viewBox', '0 0 24 24');
+                eyeIcon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
+            }
+        });
+
+        // Form submission loading animation
+        const loginForm = document.querySelector('.mcbs-login-form');
+        const loginButton = document.querySelector('.mcbs-login-button');
+
+        loginForm.addEventListener('submit', function() {
+            loginButton.classList.add('loading');
+        });
+
+        // Input focus effects
+        const inputs = document.querySelectorAll('.mcbs-form-input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.querySelector('.mcbs-input-icon').style.fill = '#1a2980';
+            });
+
+            input.addEventListener('blur', function() {
+                this.parentElement.querySelector('.mcbs-input-icon').style.fill = '#777';
+            });
+        });
+        
+        // Animate the banking theme coins
+        const coins = document.querySelectorAll('.coin');
+        coins.forEach((coin, index) => {
+            // Randomize animation duration and delay
+            const duration = 6 + Math.random() * 4;
+            const delay = Math.random() * 2;
+            coin.style.animation = `float ${duration}s infinite ${delay}s ease-in-out`;
+        });
+    });
+</script>

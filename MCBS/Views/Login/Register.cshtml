@@ -1,0 +1,146 @@
+﻿<link href="~/css/register.css" rel="stylesheet" />
+@model MCBS.Models.RegisterModel
+@{
+    ViewBag.Title = "Register";
+}
+
+
+<div class="register-container-main">
+    <!-- Floating currency elements -->
+<div class="currency" style="top: 10%; left: 5%; font-size: 24px;">₹</div>
+<div class="currency" style="top: 30%; right: 8%; font-size: 32px;">₹</div>
+<div class="currency" style="bottom: 20%; left: 7%; font-size: 28px;">₹</div>
+<div class="currency" style="bottom: 40%; right: 5%; font-size: 20px;">₹</div>
+<div class="currency" style="top: 60%; left: 10%; font-size: 18px;">₹</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        <i class="fas fa-check-circle"></i> @TempData["SuccessMessage"]
+    </div>
+}
+
+<div class="register-container">
+    <div class="register-header">
+        <h2><i class="fas fa-university bank-icon"></i>MCBS Account Registration</h2>
+        <p class="text-muted">Join our digital banking revolution</p>
+    </div>
+
+    @using (Html.BeginForm("Register", "Login", FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate" }))
+    {
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.FirstName, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "First Name" })
+                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LastName, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Last Name" })
+                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                @Html.LabelFor(m => m.EmailID, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.EmailID, new { @class = "form-control", type = "email", placeholder = "Email Address" })
+                @Html.ValidationMessageFor(m => m.EmailID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="mb-3 password-toggle">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Create Password", id = "passwordField" })
+                <span class="password-toggle-icon" id="togglePassword">
+                    <i class="fas fa-eye"></i>
+                </span>
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                <small class="form-text text-muted">Use 8 or more characters with a mix of letters, numbers & symbols</small>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-group">
+                @Html.LabelFor(m => m.MobileNo, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", placeholder = "Mobile Number" })
+                @Html.ValidationMessageFor(m => m.MobileNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 py-2 mt-3">
+            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+            <span class="btn-text">Create Account</span>
+        </button>
+
+        <div class="security-badge">
+            <i class="fas fa-lock"></i> Your information is securely encrypted
+        </div>
+           <div class="mcbs-Login-link">
+            Already an account? <a asp-controller="Login" asp-action="Login">Login</a>
+        </div>
+    }
+</div>
+
+</div>
+    <script>
+        // Password toggle functionality
+        const togglePassword = document.querySelector('#togglePassword');
+        const passwordField = document.querySelector('#passwordField');
+        
+        togglePassword.addEventListener('click', function() {
+            // Toggle the type attribute
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            
+            // Toggle the eye icon
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+            
+            // Add animation
+            this.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 200);
+        });
+
+        // Form submission loading state
+        document.querySelector('form').addEventListener('submit', function() {
+            const btn = this.querySelector('button[type="submit"]');
+            const spinner = btn.querySelector('.spinner-border');
+            const btnText = btn.querySelector('.btn-text');
+            
+            btn.disabled = true;
+            spinner.classList.remove('d-none');
+            btnText.textContent = 'Creating Account...';
+        });
+
+        // Enhanced input field interactions
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+                this.style.borderColor = 'var(--primary-color)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.classList.remove('focused');
+                this.style.borderColor = '#ddd';
+            });
+        });
+
+        // Add floating animation to currency elements
+        const currencies = document.querySelectorAll('.currency');
+        currencies.forEach((currency, index) => {
+            // Randomize animation duration and delay
+            const duration = 15 + Math.random() * 10;
+            const delay = Math.random() * 5;
+            currency.style.animation = `float ${duration}s infinite ${delay}s linear`;
+        });
+            </script>

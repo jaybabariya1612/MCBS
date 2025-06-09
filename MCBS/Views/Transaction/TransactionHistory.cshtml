@@ -1,0 +1,143 @@
+﻿<link href="~/css/TransactionHistory.css" rel="stylesheet" />
+@model List<MCBS.Models.TransactionHistoryModel>
+
+@{
+    ViewBag.Title = "Transaction History";
+}
+<div class="history-container">
+    <div class="history-header">
+        <h2><i class="fas fa-history me-2"></i>Transaction History</h2>
+        <button class="btn-download" onclick="generatePDF()">
+            <i class="fas fa-file-pdf me-1"></i> Download Statement
+        </button>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Account Number</th>
+                    <th>Your Name</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Counterparty Account</th>
+                    <th>Counterparty Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var tx in Model)
+                    {
+                        <tr>
+                            <td>@tx.TransactionId</td>
+                            <td>@tx.AccountNumber</td>
+                            <td>@tx.AccountHolderName</td>
+                            <td>@tx.TransactionType</td>
+                            <td class="@(tx.TransactionType == "Credit" ? "amount-credit" : "amount-debit")">
+                                @(tx.TransactionType == "Credit" ? "+" : "-")@tx.Amount.ToString("C")
+                            </td>
+                            <td>@tx.TransactionDate.ToString("yyyy-MM-dd HH:mm")</td>
+                            <td>@tx.Description</td>
+                            <td>@tx.CounterpartyAccountNumber</td>
+                            <td>@tx.CounterpartyAccountHolderName</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="9" class="no-transactions">No transactions found.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+
+    <script>
+        function generatePDF() {
+            // Initialize jsPDF
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Add title
+            doc.setFontSize(18);
+            doc.setTextColor(0, 0, 0);
+            doc.text('Transaction Statement', 105, 15, { align: 'center' });
+
+            // Add account info (you might want to dynamically populate these)
+            doc.setFontSize(12);
+            doc.text(`Account Holder: @Model?.FirstOrDefault()?.AccountHolderName`, 14, 25);
+            doc.text(`Account Number: @Model?.FirstOrDefault()?.AccountNumber`, 14, 35);
+            doc.text(`Statement Date: ${new Date().toLocaleDateString()}`, 14, 45);
+
+            // Add transaction table
+            const headers = [
+                ["Date", "Description", "Type", "Amount", "Counterparty"]
+            ];
+
+            const data = [
+            @if (Model != null && Model.Any())
+            {
+                    foreach (var tx in Model)
+                    {
+                            <text>
+                                [
+                                    "@tx.TransactionDate.ToString("yyyy-MM-dd HH:mm")",
+                                    "@tx.Description",
+                                    "@tx.TransactionType",
+                                    "@((tx.TransactionType == "Credit" ? "+" : "-") + tx.Amount.ToString("C"))",
+                                    "@tx.CounterpartyAccountHolderName (@tx.CounterpartyAccountNumber)"
+                                ],
+                            </text>
+                    }
+            }
+            ];
+
+            doc.autoTable({
+                head: headers,
+                body: data,
+                startY: 55,
+                styles: {
+                    cellPadding: 5,
+                    fontSize: 10,
+                    valign: 'middle',
+                    halign: 'left'
+                },
+                headStyles: {
+                    fillColor: [0, 86, 179],
+                    textColor: 255,
+                    fontStyle: 'bold'
+                },
+                alternateRowStyles: {
+                    fillColor: [248, 249, 250]
+                },
+                columnStyles: {
+                    0: { cellWidth: 30 },
+                    1: { cellWidth: 50 },
+                    2: { cellWidth: 20 },
+                    3: { cellWidth: 25, halign: 'right' },
+                    4: { cellWidth: 50 }
+                },
+                didDrawPage: function (data) {
+                    // Footer
+                    doc.setFontSize(10);
+                    doc.setTextColor(150);
+                    doc.text('Generated by MCBS Banking', data.settings.margin.left, doc.internal.pageSize.height - 10);
+                }
+            });
+
+            // Save the PDF
+            doc.save(`TransactionStatement_${new Date().toISOString().slice(0,10)}.pdf`);
+        }
+    </script>
+}

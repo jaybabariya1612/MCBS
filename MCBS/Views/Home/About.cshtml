@@ -1,0 +1,284 @@
+﻿@{
+    ViewData["Title"] = "About Us";
+}
+<link href="~/css/About.css" rel="stylesheet" />
+
+<section class="about-hero py-5 text-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-3 fw-bold mb-4">Redefining Banking for You</h1>
+                <p class="lead mb-4">MCBS Bank is more than just a financial institution - we're your partner in achieving financial freedom through innovative digital solutions.</p>
+                <div class="d-flex gap-3">
+                    <a href="#our-story" class="btn btn-light btn-lg px-4">Our Story</a>
+                    <a href="@Url.Action("ContactUs", "Home")" class="btn btn-outline-light btn-lg px-4">Contact Us</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="~/images/hero-banking.png" alt="Digital Banking" class="img-fluid rounded-3 shadow-lg">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="our-story" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold text-primary">Our Journey</h2>
+            <p class="lead">From humble beginnings to financial innovation leader</p>
+        </div>
+
+        <div class="row g-4 align-items-center">
+            <div class="col-md-6">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2010</div>
+                        <div class="timeline-content">
+                            <h4>Founded with a Vision</h4>
+                            <p>Established as a community bank with just 5 employees and one branch location.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2015</div>
+                        <div class="timeline-content">
+                            <h4>Digital Transformation</h4>
+                            <p>Launched our first mobile banking app, serving 10,000 customers in the first year.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2020</div>
+                        <div class="timeline-content">
+                            <h4>MCBS Platform Launch</h4>
+                            <p>Introduced our revolutionary Mini Core Banking System with full digital capabilities.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Present</div>
+                        <div class="timeline-content">
+                            <h4>Serving 500,000+ Customers</h4>
+                            <p>Now recognized as a leader in digital banking innovation with nationwide reach.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-0 shadow-lg h-100">
+                    <div class="card-body p-4">
+                        <h3 class="card-title text-primary">Why We're Different</h3>
+                        <p class="card-text">At MCBS Bank, we combine the personal touch of community banking with cutting-edge technology to deliver exceptional service.</p>
+
+                        <div class="d-flex mb-3">
+                            <div class="me-4 text-primary">
+                                <i class="fas fa-bolt fa-2x"></i>
+                            </div>
+                            <div>
+                                <h5>Lightning Fast Transactions</h5>
+                                <p>Our proprietary technology ensures transfers happen in real-time, 24/7.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex mb-3">
+                            <div class="me-4 text-primary">
+                                <i class="fas fa-shield-alt fa-2x"></i>
+                            </div>
+                            <div>
+                                <h5>Military-Grade Security</h5>
+                                <p>Multi-layer encryption and biometric authentication protect your assets.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex">
+                            <div class="me-4 text-primary">
+                                <i class="fas fa-headset fa-2x"></i>
+                            </div>
+                            <div>
+                                <h5>24/7 Customer Support</h5>
+                                <p>Real humans available anytime to assist with your banking needs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold text-primary">Our Core Principles</h2>
+            <p class="lead">The foundation of everything we do</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-box mb-3">
+                            <i class="fas fa-lightbulb fa-2x"></i>
+                        </div>
+                        <h4 class="card-title">Innovation</h4>
+                        <p class="card-text">We constantly push boundaries to bring you the most advanced banking solutions before they become mainstream.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-box mb-3">
+                            <i class="fas fa-user-shield fa-2x"></i>
+                        </div>
+                        <h4 class="card-title">Trust</h4>
+                        <p class="card-text">Your financial security is our top priority. We maintain the highest standards of data protection and ethical practices.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-box mb-3">
+                            <i class="fas fa-hands-helping fa-2x"></i>
+                        </div>
+                        <h4 class="card-title">Community</h4>
+                        <p class="card-text">We reinvest in local communities through financial education programs and small business support initiatives.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <img src="~/images/team-working.png" alt="MCBS Team" class="img-fluid rounded-3 shadow">
+            </div>
+            <div class="col-lg-6">
+                <h2 class="display-5 fw-bold text-primary mb-4">Meet Our Leadership</h2>
+                <p class="lead mb-4">Driven by a team of banking veterans and tech innovators</p>
+
+                <div class="accordion" id="leadershipAccordion">
+                    <div class="accordion-item border-0 mb-3 shadow-sm rounded">
+                        <h3 class="accordion-header" id="headingOne">
+                            <button class="accordion-button bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                <div class="d-flex align-items-center">
+                                    <img src="~/images/ceo.png" class="rounded-circle me-3" width="60" alt="CEO">
+                                    <div>
+                                        <h5 class="mb-0">Sarah Johnson</h5>
+                                        <small class="text-primary">CEO & Founder</small>
+                                    </div>
+                                </div>
+                            </button>
+                        </h3>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+                            <div class="accordion-body">
+                                <p>With 25 years in financial services, Sarah pioneered the digital transformation that became MCBS Bank. Her vision for accessible banking has guided our growth.</p>
+                                <p class="mb-0"><em>"Banking should empower people, not complicate their lives."</em></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item border-0 mb-3 shadow-sm rounded">
+                        <h3 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                <div class="d-flex align-items-center">
+                                    <img src="~/images/cto.png" class="rounded-circle me-3" width="60" alt="CTO">
+                                    <div>
+                                        <h5 class="mb-0">Michael Chen</h5>
+                                        <small class="text-primary">Chief Technology Officer</small>
+                                    </div>
+                                </div>
+                            </button>
+                        </h3>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+                            <div class="accordion-body">
+                                <p>Former fintech entrepreneur who joined to build our revolutionary banking platform. Leads a team of 50+ engineers developing next-gen features.</p>
+                                <p class="mb-0"><em>"Security and usability aren't opposites - we deliver both."</em></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item border-0 shadow-sm rounded">
+                        <h3 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                <div class="d-flex align-items-center">
+                                    <img src="~/images/cfo.png" class="rounded-circle me-3" width="60" alt="CFO">
+                                    <div>
+                                        <h5 class="mb-0">David Rodriguez</h5>
+                                        <small class="text-primary">Chief Financial Officer</small>
+                                    </div>
+                                </div>
+                            </button>
+                        </h3>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
+                            <div class="accordion-body">
+                                <p>Financial strategist with deep expertise in risk management and sustainable growth. Ensures we remain financially strong while investing in innovation.</p>
+                                <p class="mb-0"><em>"Responsible banking creates value for all stakeholders."</em></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold text-primary">By the Numbers</h2>
+            <p class="lead">The impact we've made together</p>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-md-3">
+                <div class="counter-box p-4 rounded-3 shadow-sm">
+                    <h3 class="display-4 fw-bold text-primary">500K+</h3>
+                    <p class="mb-0">Satisfied Customers</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="counter-box p-4 rounded-3 shadow-sm">
+                    <h3 class="display-4 fw-bold text-primary">$2.5B</h3>
+                    <p class="mb-0">Assets Under Management</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="counter-box p-4 rounded-3 shadow-sm">
+                    <h3 class="display-4 fw-bold text-primary">24/7</h3>
+                    <p class="mb-0">Customer Support</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="counter-box p-4 rounded-3 shadow-sm">
+                    <h3 class="display-4 fw-bold text-primary">99.9%</h3>
+                    <p class="mb-0">Uptime Reliability</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-primary-light">
+    <div class="container">
+        <div class="card border-0 shadow-lg overflow-hidden">
+            <div class="row g-0">
+                <div class="col-lg-6 d-flex align-items-center">
+                    <div class="p-4 p-lg-5">
+                        <h2 class="display-5 fw-bold text-primary mb-4">Ready to Experience Better Banking?</h2>
+                        <p class="lead mb-4">Join thousands of satisfied customers who trust MCBS Bank with their financial needs.</p>
+                        <div class="d-flex flex-wrap gap-3">
+                            <a href="~@Url.Action("ContactUs", "Home")" class="btn btn-outline-primary btn-lg px-4">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block">
+                    <img src="~/images/banking-app.png" alt="MCBS Mobile App" class="img-fluid h-100 object-fit-cover">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

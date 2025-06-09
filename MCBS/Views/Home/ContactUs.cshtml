@@ -1,0 +1,79 @@
+﻿<link href="~/css/ContactUs.css" rel="stylesheet" />
+@model MCBS.Models.ContactUsModel
+
+@{
+    ViewBag.Title = "Contact Us";
+}
+<div class="contact-container">
+    <div class="contact-header">
+        <h2>Contact Us</h2>
+        <p>Have questions or feedback? We'd love to hear from you!</p>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            <i class="fas fa-check-circle"></i> @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <form asp-action="ContactUs" method="post" class="contact-form">
+        <div class="form-row">
+            <div class="form-group">
+                <label asp-for="FullName" class="form-label">
+                    <i class="fas fa-user"></i> Full Name
+                </label>
+                <input asp-for="FullName" class="form-control" placeholder="Enter your full name" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="form-label">
+                    <i class="fas fa-envelope"></i> Email
+                </label>
+                <input asp-for="Email" class="form-control" placeholder="Enter your email address" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label asp-for="MobileNumber" class="form-label">
+                    <i class="fas fa-phone"></i> Mobile Number
+                </label>
+                <input asp-for="MobileNumber" class="form-control" placeholder="Enter your mobile number" />
+                <span asp-validation-for="MobileNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Subject" class="form-label">
+                    <i class="fas fa-tag"></i> Subject
+                </label>
+                <input asp-for="Subject" class="form-control" placeholder="What's this about?" />
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Message" class="form-label">
+                <i class="fas fa-comment"></i> Message
+            </label>
+            <textarea asp-for="Message" class="form-control" rows="5" placeholder="Type your message here..."></textarea>
+            <span asp-validation-for="Message" class="text-danger"></span>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-submit">
+                <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+}

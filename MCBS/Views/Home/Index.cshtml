@@ -1,0 +1,682 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<link href="~/css/index.css" rel="stylesheet" />
+
+
+<!-- Hero Section -->
+<div class="hero-section text-white py-5 position-relative overflow-hidden" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));">
+
+    <div class="container position-relative z-2">
+        <div class="row align-items-center">
+            <div class="col-lg-6 fade-in">
+                <h1 class="display-4 fw-bold mb-4">Welcome to <span class="text-accent">MCBS</span> Bank</h1>
+                <p class="lead mb-4">Your trusted partner in digital banking - Secure, Fast, and Reliable banking solutions for everyone.</p>
+                <div class="d-flex gap-3 flex-wrap">
+                    @if (Context.Session.GetString("UserName") == null)
+                    {
+                        <a href="@Url.Action("Login", "Login")" class="btn btn-light btn-lg px-4 py-3 fw-bold shadow-sm">
+                            <i class="fas fa-sign-in-alt me-2"></i>Login
+                        </a>
+                    }
+
+                    <a href="#features" class="btn btn-accent btn-lg px-4 py-3 fw-bold shadow-sm">
+                        <i class="fas fa-search me-2"></i>Explore Features
+                    </a>
+                </div>
+                <div class="mt-4 d-flex align-items-center">
+                    <small class="text-light">256-bit SSL Encryption | RBI Compliant</small>
+                </div>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block slide-up">
+                <div class="position-relative">
+                    <img src="~/images/hero-banking.png" alt="Digital Banking" class="img-fluid rounded-3 shadow-lg">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 banking-app-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Section -->
+<div class="py-5 bg-white">
+    <div class="container">
+        <div class="row text-center g-4">
+            <div class="col-md-3">
+                <div class="p-4 rounded-3 shadow-sm slide-up stat-card">
+                    <div class="stat-number">15K+</div>
+                    <p class="mb-0 fw-bold">Happy Customers</p>
+                    <div class="progress mt-3" style="height: 4px;">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 85%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-4 rounded-3 shadow-sm slide-up stat-card" style="animation-delay: 0.2s;">
+                    <div class="stat-number">₹850M+</div>
+                    <p class="mb-0 fw-bold">Transactions</p>
+                    <div class="progress mt-3" style="height: 4px;">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 92%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-4 rounded-3 shadow-sm slide-up stat-card" style="animation-delay: 0.4s;">
+                    <div class="stat-number">99.99%</div>
+                    <p class="mb-0 fw-bold">Uptime</p>
+                    <div class="progress mt-3" style="height: 4px;">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 99%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-4 rounded-3 shadow-sm slide-up stat-card" style="animation-delay: 0.6s;">
+                    <div class="stat-number">4.9/5</div>
+                    <p class="mb-0 fw-bold">Customer Rating</p>
+                    <div class="progress mt-3" style="height: 4px;">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 98%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="container py-5" id="features">
+    <section class="text-center mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="mb-4 fw-bold slide-up">Why Choose <span class="text-primary">MCBS Bank</span>?</h2>
+                <p class="lead text-muted mb-5 slide-up" style="animation-delay: 0.2s;">We combine cutting-edge technology with traditional banking values to deliver exceptional service</p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card p-4 h-100 slide-up">
+                    <div class="icon-lg bg-primary bg-opacity-10 text-primary rounded-circle mb-4 mx-auto">
+                        <i class="fas fa-shield-alt fa-2x"></i>
+                    </div>
+                    <h4 class="mb-3">Bank-Grade Security</h4>
+                    <p class="text-muted">Multi-layered security with 256-bit encryption, two-factor authentication, and real-time fraud monitoring to keep your money safe.</p>
+                    <ul class="text-start ps-4 mt-3">
+                        <li>Biometric authentication</li>
+                        <li>Transaction alerts</li>
+                        <li>Secure socket layer (SSL)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card p-4 h-100 slide-up" style="animation-delay: 0.2s;">
+                    <div class="icon-lg bg-primary bg-opacity-10 text-primary rounded-circle mb-4 mx-auto">
+                        <i class="fas fa-bolt fa-2x"></i>
+                    </div>
+                    <h4 class="mb-3">Instant Transactions</h4>
+                    <p class="text-muted">Real-time processing for all transactions - transfers, payments, and deposits with immediate confirmation.</p>
+                    <ul class="text-start ps-4 mt-3">
+                        <li>24/7 fund transfers</li>
+                        <li>QuickPay to contacts</li>
+                        <li>UPI integration</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card p-4 h-100 slide-up" style="animation-delay: 0.4s;">
+                    <div class="icon-lg bg-primary bg-opacity-10 text-primary rounded-circle mb-4 mx-auto">
+                        <i class="fas fa-hand-holding-usd fa-2x"></i>
+                    </div>
+                    <h4 class="mb-3">Smart Banking</h4>
+                    <p class="text-muted">AI-powered insights to help you save, invest, and manage your money more effectively.</p>
+                    <ul class="text-start ps-4 mt-3">
+                        <li>Spending analytics</li>
+                        <li>Automated savings</li>
+                        <li>Personalized offers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Digital Banking Section -->
+    <section class="row align-items-center mb-5 py-5 bg-light rounded-4">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <div class="position-relative">
+                <img src="~/images/hero-banking.png" alt="Digital Banking" class="img-fluid rounded-3 shadow slide-up">
+                <div class="position-absolute top-0 start-0 w-100 h-100 banking-app-overlay"></div>
+            </div>
+        </div>
+        <div class="col-lg-6 slide-up" style="animation-delay: 0.3s;">
+            <h2 class="fw-bold mb-4">Experience <span class="text-primary">Digital Banking</span> Redefined</h2>
+            <p class="lead text-muted">
+                Bank anytime, anywhere with our award-winning mobile app
+            </p>
+            <p>
+                Our digital platform gives you complete control over your finances with intuitive features designed for modern banking needs.
+            </p>
+
+            <div class="row mt-4 g-3">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="icon-sm bg-primary bg-opacity-10 text-primary rounded-circle me-3">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-0">Mobile Banking</h5>
+                            <small class="text-muted">Full-featured banking app</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="icon-sm bg-primary bg-opacity-10 text-primary rounded-circle me-3">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-0">UPI Payments</h5>
+                            <small class="text-muted">Instant money transfers</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="icon-sm bg-primary bg-opacity-10 text-primary rounded-circle me-3">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-0">Smart Alerts</h5>
+                            <small class="text-muted">Real-time notifications</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="icon-sm bg-primary bg-opacity-10 text-primary rounded-circle me-3">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-0">Spending Insights</h5>
+                            <small class="text-muted">Visual analytics</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex gap-3 mt-4 flex-wrap">
+                <a href="#" class="btn btn-dark btn-lg px-4 py-2 shadow-sm">
+                    <i class="fab fa-apple me-2"></i> App Store
+                </a>
+                <a href="#" class="btn btn-dark btn-lg px-4 py-2 shadow-sm">
+                    <i class="fab fa-google-play me-2"></i> Play Store
+                </a>
+                <a href="#" class="btn btn-outline-dark btn-lg px-4 py-2 shadow-sm">
+                    <i class="fas fa-laptop me-2"></i> Internet Banking
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Account Types Section -->
+    <section class="mb-5 py-5">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold slide-up">Our <span class="text-primary">Account</span> Options</h2>
+            <p class="lead text-muted slide-up" style="animation-delay: 0.2s;">Choose the account that fits your financial needs</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card account-card h-100 slide-up">
+                    <div class="card-header bg-primary text-white py-3">
+                        <h4 class="mb-0">Basic Savings</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            <div class="icon-lg bg-primary bg-opacity-10 text-primary rounded-circle mx-auto">
+                                <i class="fas fa-piggy-bank fa-2x"></i>
+                            </div>
+                        </div>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Minimum balance ₹1,000</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> 3.5% interest p.a.</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Free debit card</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> 5 free transactions/month</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Mobile banking access</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card account-card h-100 slide-up" style="animation-delay: 0.2s;">
+                    <div class="card-header bg-primary text-white py-3">
+                        <h4 class="mb-0">Premium Savings</h4>
+                        <span class="badge bg-accent">Most Popular</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            <div class="icon-lg bg-primary bg-opacity-10 text-primary rounded-circle mx-auto">
+                                <i class="fas fa-gem fa-2x"></i>
+                            </div>
+                        </div>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Minimum balance ₹10,000</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> 5.5% interest p.a.</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Free platinum debit card</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Unlimited transactions</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Priority customer service</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Free cheque book</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card account-card h-100 slide-up" style="animation-delay: 0.4s;">
+                    <div class="card-header bg-primary text-white py-3">
+                        <h4 class="mb-0">Student Account</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            <div class="icon-lg bg-primary bg-opacity-10 text-primary rounded-circle mx-auto">
+                                <i class="fas fa-user-graduate fa-2x"></i>
+                            </div>
+                        </div>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Zero balance account</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> 4% interest p.a.</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Free debit card</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> 10 free transactions/month</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Special student offers</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> No minimum age</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loan Products Section -->
+    <section class="mb-5 py-5 bg-light rounded-4">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold slide-up">Our <span class="text-primary">Loan</span> Products</h2>
+            <p class="lead text-muted slide-up" style="animation-delay: 0.2s;">Flexible financing solutions for your needs</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="p-4 h-100 slide-up loan-card">
+                    <div class="icon-lg bg-primary bg-opacity-10 text-primary rounded-circle mb-4 mx-auto">
+                        <i class="fas fa-home fa-2x"></i>
+                    </div>
+                    <h4 class="text-center mb-3">Home Loans</h4>
+                    <ul class="text-center list-unstyled">
+                        <li class="mb-2">Up to ₹5 Crores</li>
+                        <li class="mb-2">Starting at 8.4% p.a.</li>
+                        <li class="mb-2">Flexible tenure up to 30 years</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="p-4 h-100 slide-up loan-card" style="animation-delay: 0.2s;">
+                    <div class="icon-lg bg-primary bg-opacity-10 text-primary rounded-circle mb-4 mx-auto">
+                        <i class="fas fa-car fa-2x"></i>
+                    </div>
+                    <h4 class="text-center mb-3">Car Loans</h4>
+                    <ul class="text-center list-unstyled">
+                        <li class="mb-2">Up to ₹50 Lakhs</li>
+                        <li class="mb-2">Starting at 7.9% p.a.</li>
+                        <li class="mb-2">Tenure up to 7 years</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="p-4 h-100 slide-up loan-card" style="animation-delay: 0.4s;">
+                    <div class="icon-lg bg-primary bg-opacity-10 text-primary rounded-circle mb-4 mx-auto">
+                        <i class="fas fa-briefcase fa-2x"></i>
+                    </div>
+                    <h4 class="text-center mb-3">Business Loans</h4>
+                    <ul class="text-center list-unstyled">
+                        <li class="mb-2">Up to ₹2 Crores</li>
+                        <li class="mb-2">Starting at 10.5% p.a.</li>
+                        <li class="mb-2">Tenure up to 5 years</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="p-4 h-100 slide-up loan-card" style="animation-delay: 0.6s;">
+                    <div class="icon-lg bg-primary bg-opacity-10 text-primary rounded-circle mb-4 mx-auto">
+                        <i class="fas fa-graduation-cap fa-2x"></i>
+                    </div>
+                    <h4 class="text-center mb-3">Education Loans</h4>
+                    <ul class="text-center list-unstyled">
+                        <li class="mb-2">Up to ₹1.5 Crores</li>
+                        <li class="mb-2">Starting at 8.5% p.a.</li>
+                        <li class="mb-2">Moratorium period available</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="mb-5 py-5">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold slide-up">What Our <span class="text-primary">Customers</span> Say</h2>
+            <p class="lead text-muted slide-up" style="animation-delay: 0.2s;">Trusted by thousands of happy customers across India</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="testimonial-card p-4 rounded-3 shadow-sm h-100 slide-up">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="~/images/Rajesh_Kumar.png" class="rounded-circle me-3" width="60" alt="Rajesh Kumar">
+                        <div>
+                            <h5 class="mb-0">Rajesh Kumar</h5>
+                            <small class="text-muted">Small Business Owner</small>
+                            <div class="text-warning mt-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mb-0">"MCBS Bank's business loan helped me expand my shop when I needed it most. The process was quick and the staff was very supportive."</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="testimonial-card p-4 rounded-3 shadow-sm h-100 slide-up" style="animation-delay: 0.2s;">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="~/images/Priya_Sharma.png" class="rounded-circle me-3" width="60" alt="Priya Sharma">
+                        <div>
+                            <h5 class="mb-0">Priya Sharma</h5>
+                            <small class="text-muted">College Student</small>
+                            <div class="text-warning mt-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mb-0">"As a student, the zero balance account is perfect for me. The mobile app is so easy to use and I love the spending insights feature."</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="testimonial-card p-4 rounded-3 shadow-sm h-100 slide-up" style="animation-delay: 0.4s;">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="~/images/Amit_Patel.png" class="rounded-circle me-3" width="60" alt="Amit Patel">
+                        <div>
+                            <h5 class="mb-0">Amit Patel</h5>
+                            <small class="text-muted">IT Professional</small>
+                            <div class="text-warning mt-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mb-0">"The home loan process was transparent with no hidden charges. Got approval within 3 days and the interest rates are very competitive."</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Security Section -->
+    <section class="mb-5 py-5 bg-dark text-white rounded-4">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <img src="~/images/secure-badge.png" alt="Bank Security" class="img-fluid rounded-3 slide-up">
+            </div>
+            <div class="col-lg-6 slide-up" style="animation-delay: 0.3s;">
+                <h2 class="fw-bold mb-4">Your Security is Our <span class="text-accent">Top Priority</span></h2>
+                <p class="lead">
+                    We employ multiple layers of security to protect your accounts and transactions
+                </p>
+
+                <div class="row mt-4 g-3">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start mb-4">
+                            <div class="icon-sm bg-white bg-opacity-10 text-accent rounded-circle me-3 mt-1">
+                                <i class="fas fa-fingerprint"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-1">Biometric Authentication</h5>
+                                <p class="small mb-0">Secure login using fingerprint or face recognition</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start mb-4">
+                            <div class="icon-sm bg-white bg-opacity-10 text-accent rounded-circle me-3 mt-1">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-1">256-bit Encryption</h5>
+                                <p class="small mb-0">Bank-grade security for all transactions</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start mb-4">
+                            <div class="icon-sm bg-white bg-opacity-10 text-accent rounded-circle me-3 mt-1">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-1">Fraud Monitoring</h5>
+                                <p class="small mb-0">24/7 surveillance for suspicious activity</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start mb-4">
+                            <div class="icon-sm bg-white bg-opacity-10 text-accent rounded-circle me-3 mt-1">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-1">Instant Alerts</h5>
+                                <p class="small mb-0">Real-time notifications for all transactions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- News & Updates Section -->
+    <section class="mb-5 py-5">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold slide-up">Latest <span class="text-primary">News</span> & Updates</h2>
+            <p class="lead text-muted slide-up" style="animation-delay: 0.2s;">Stay informed with our banking news and announcements</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 slide-up news-card">
+                    <img src="~/images/Digital_Banking.png" class="card-img-top" alt="Digital Banking">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-2">
+                            <small class="text-muted"><i class="far fa-calendar me-1"></i> June 5, 2025</small>
+                            <small class="text-primary">Banking</small>
+                        </div>
+                        <h5 class="card-title">MCBS Launches New Mobile Banking Features</h5>
+                        <p class="card-text">Our latest update includes budget tracking, spending analytics, and quick balance view without login.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 slide-up news-card" style="animation-delay: 0.2s;">
+                    <img src="~/images/Interest_Rates.png" class="card-img-top" alt="Interest Rates">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-2">
+                            <small class="text-muted"><i class="far fa-calendar me-1"></i> May 22, 2025</small>
+                            <small class="text-primary">Rates</small>
+                        </div>
+                        <h5 class="card-title">Revised Interest Rates on Savings Accounts</h5>
+                        <p class="card-text">We're pleased to announce increased interest rates on our premium savings accounts effective July 1st.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 slide-up news-card" style="animation-delay: 0.4s;">
+                    <img src="~/images/Bank_Branch.png" class="card-img-top" alt="Bank Branch">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-2">
+                            <small class="text-muted"><i class="far fa-calendar me-1"></i> May 10, 2025</small>
+                            <small class="text-primary">Expansion</small>
+                        </div>
+                        <h5 class="card-title">New MCBS Branch Opening in Bangalore</h5>
+                        <p class="card-text">Visit our new branch at MG Road with state-of-the-art facilities and dedicated customer service desks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="mb-5 py-5 bg-light rounded-4">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold slide-up">Frequently Asked <span class="text-primary">Questions</span></h2>
+            <p class="lead text-muted slide-up" style="animation-delay: 0.2s;">Find answers to common questions about MCBS Bank</p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item slide-up">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                How do I open an account with MCBS Bank?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                You can open an account online by clicking on the "Open New Account" button above and completing the application form. Alternatively, you can visit any of our branches with your KYC documents (ID proof, address proof, and photographs).
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item slide-up" style="animation-delay: 0.1s;">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                What is the minimum balance requirement?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Our basic savings account requires a minimum balance of ₹1,000, while premium accounts require ₹10,000. Student accounts have no minimum balance requirement. These amounts can be maintained as an average quarterly balance.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item slide-up" style="animation-delay: 0.2s;">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                How secure is online banking with MCBS?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                We use 256-bit SSL encryption, two-factor authentication, and advanced fraud monitoring systems to ensure your online banking experience is completely secure. All transactions are protected and we never share your data with third parties.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item slide-up" style="animation-delay: 0.3s;">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                What are your customer service hours?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Our customer care is available 24/7 via phone (+91 1800 123 4567) and email (support@mcbsbank.com). Branch services are available from 9:30 AM to 4:30 PM Monday to Saturday (except public holidays).
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item slide-up" style="animation-delay: 0.4s;">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                How do I apply for a loan?
+                            </button>
+                        </h2>
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                You can apply for loans through our website, mobile app, or by visiting any branch. The process is simple - fill the application form, submit required documents (income proof, identity proof, etc.), and get approval within 24-72 hours for most loan types.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4 slide-up" style="animation-delay: 0.5s;">
+                    <p class="mb-3">Couldn't find what you're looking for?</p>
+                    <a href="@Url.Action("ContactUs", "Home")" class="btn btn-primary">Contact Our Support Team</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- Floating Action Buttons -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1000;">
+    <div class="btn-group-vertical gap-3">
+        <div class="btn btn-primary rounded-circle shadow-lg p-3 float" style="width: 60px; height: 60px;" data-bs-toggle="tooltip" data-bs-placement="left" title="Live Chat">
+            <i class="fas fa-comment-dots"></i>
+        </div>
+        <div class="btn btn-accent rounded-circle shadow-lg p-3 float-delay-1" style="width: 60px; height: 60px;" data-bs-toggle="tooltip" data-bs-placement="left" title="Quick Help">
+            <i class="fas fa-question"></i>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Initialize tooltips
+    document.addEventListener('DOMContentLoaded', function() {
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+
+        // Animation trigger on scroll
+        const animatedElements = document.querySelectorAll('.slide-up, .fade-in');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        animatedElements.forEach(el => {
+            el.style.opacity = 0;
+            if (el.classList.contains('slide-up')) {
+                el.style.transform = 'translateY(30px)';
+                const delay = el.style.animationDelay || '0s';
+                el.style.transition = `opacity 0.6s ${delay}, transform 0.6s ${delay}`;
+            } else {
+                el.style.transition = 'opacity 1s ease-in';
+            }
+            observer.observe(el);
+        });
+    });
+</script>

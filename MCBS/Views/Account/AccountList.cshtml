@@ -1,0 +1,527 @@
+﻿@model List<MCBS.Models.AccountModel>
+
+@{
+    ViewData["Title"] = "Account List";
+}
+<link href="~/css/AccountList.css" rel="stylesheet" />
+<div class="account-list-container">
+    <div class="account-list-header">
+        <h2 class="account-list-title">Bank Account Management</h2>
+        <div class="account-list-controls">
+            <button class="account-list-btn account-list-btn-primary" onclick="exportToExcel()">
+                <i class="fas fa-file-excel"></i> Export Excel
+            </button>
+            <button class="account-list-btn account-list-btn-danger" onclick="exportToPDF()">
+                <i class="fas fa-file-pdf"></i> Export PDF
+            </button>
+            <a asp-action="Account" class="account-list-btn account-list-btn-success text-decoration-none">
+                <i class="fas fa-plus-circle"></i> New Account
+            </a>
+        </div>
+    </div>
+
+    <div class="account-list-filters">
+        <div class="account-list-search">
+            <i class="fas fa-search"></i>
+            <input type="text" id="accountSearch" placeholder="Search accounts..." class="account-list-search-input">
+        </div>
+
+        <div class="account-list-filter-group">
+            <select id="accountTypeFilter" class="account-list-filter">
+                <option value="">All Account Types</option>
+                <option>Savings</option>
+                <option>Current</option>
+                <option>Fixed Deposit</option>
+                <option>Recurring Deposit</option>
+            </select>
+
+            <select id="statusFilter" class="account-list-filter">
+                <option value="">All Statuses</option>
+                <option value="false">Active</option>
+                <option value="true">Inactive</option>
+            </select>
+
+            <select id="balanceFilter" class="account-list-filter">
+                <option value="">Any Balance</option>
+                <option value="high">Highest Balance</option>
+                <option value="low">Lowest Balance</option>
+                <option value="5000">Above ₹5,000</option>
+                <option value="10000">Above ₹10,000</option>
+                <option value="50000">Above ₹50,000</option>
+            </select>
+
+            <button class="account-list-btn account-list-btn-secondary" onclick="resetFilters()">
+                <i class="fas fa-sync-alt"></i> Reset
+            </button>
+        </div>
+    </div>
+
+    <div class="account-list-stats">
+        <div class="account-stat-card">
+            <div class="account-stat-icon bg-primary">
+                <i class="fas fa-wallet"></i>
+            </div>
+            <div class="account-stat-info">
+                <h3>@Model.Count</h3>
+                <p>Total Accounts</p>
+            </div>
+        </div>
+
+        <div class="account-stat-card">
+            <div class="account-stat-icon bg-success">
+                <i class="fas fa-rupee-sign"></i>
+            </div>
+            <div class="account-stat-info">
+                <h3>₹@Model.Sum(a => a.Balance).ToString("N2")</h3>
+                <p>Total Balance</p>
+            </div>
+        </div>
+
+        <div class="account-stat-card">
+            <div class="account-stat-icon bg-info">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="account-stat-info">
+                <h3>@Model.Count(a => a.IsActive)</h3>
+                <p>Active Accounts</p>
+            </div>
+        </div>
+
+        <div class="account-stat-card">
+            <div class="account-stat-icon bg-warning">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <div class="account-stat-info">
+                <h3>@Model.Count(a => !a.IsActive)</h3>
+                <p>Inactive Accounts</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="account-list-table-container">
+        <table id="accountTable" class="account-list-table">
+            <thead>
+                <tr>
+                    <th data-sort="holder">Account Holder <i class="fas fa-sort"></i></th>
+                    <th data-sort="number">Account No. <i class="fas fa-sort"></i></th>
+                    <th data-sort="branch">Branch <i class="fas fa-sort"></i></th>
+                    <th data-sort="type">Type <i class="fas fa-sort"></i></th>
+                    <th data-sort="mobile">Mobile <i class="fas fa-sort"></i></th>
+                    <th data-sort="balance">Balance <i class="fas fa-sort"></i></th>
+                    <th data-sort="status">Status <i class="fas fa-sort"></i></th>
+                    <th data-sort="opened">Opened On <i class="fas fa-sort"></i></th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var acc in Model)
+                {
+                    <tr>
+                        <td>@acc.AccountHolderName</td>
+                        <td>@acc.AccountNumber</td>
+                        <td>@acc.BranchName</td>
+                        <td><span class="account-badge account-badge-@acc.AccountType.ToLower().Replace(" ", "")">@acc.AccountType</span></td>
+                        <td>@acc.MobileNumber</td>
+                        <td>₹@acc.Balance.ToString("N2")</td>
+                        <td>
+                            <span class="account-status @(acc.IsActive ? "account-status-active" : "account-status-inactive")">
+                                @(acc.IsActive ? "Active" : "Inactive")
+                            </span>
+                        </td>
+                        <td>@acc.DateOfOpening.ToString("yyyy-MM-dd")</td>
+                        <td class="account-actions">
+                            <a class="account-action-btn account-action-view" asp-action="AccountDetails" asp-route-id="@acc.AccountId" title="View">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a class="account-action-btn account-action-edit" asp-action="AccountEdit" asp-route-id="@acc.AccountId" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a class="account-action-btn account-action-statement" asp-action="AccountStatement" asp-route-id="@acc.AccountId" title="Statement">
+                                <i class="fas fa-file-invoice"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="account-list-pagination">
+        <div class="account-list-pagination-info">
+            Showing <span id="showingFrom">1</span> to <span id="showingTo">10</span> of <span>@Model.Count</span> accounts
+        </div>
+        <div class="account-list-pagination-controls">
+            <button class="account-list-pagination-btn" id="prevPage" disabled>
+                <i class="fas fa-chevron-left"></i> Previous
+            </button>
+            <div class="account-list-pagination-pages" id="paginationNumbers"></div>
+            <button class="account-list-pagination-btn" id="nextPage">
+                Next <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
+
+    <script>
+        // Initialize variables
+        let currentPage = 1;
+        const rowsPerPage = 10;
+        let currentSortColumn = null;
+        let currentSortDirection = 'asc';
+        let filteredData = [];
+
+        // DOM elements
+        const table = document.getElementById('accountTable');
+        const tbody = table.querySelector('tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const searchInput = document.getElementById('accountSearch');
+        const accountTypeFilter = document.getElementById('accountTypeFilter');
+        const statusFilter = document.getElementById('statusFilter');
+        const balanceFilter = document.getElementById('balanceFilter');
+        const prevPageBtn = document.getElementById('prevPage');
+        const nextPageBtn = document.getElementById('nextPage');
+        const paginationNumbers = document.getElementById('paginationNumbers');
+        const showingFrom = document.getElementById('showingFrom');
+        const showingTo = document.getElementById('showingTo');
+
+        // Initialize
+        filteredData = rows;
+        updateTable();
+        setupSorting();
+
+        // Search functionality
+        searchInput.addEventListener('input', function() {
+            currentPage = 1;
+            filterData();
+        });
+
+        // Filter functionality
+        accountTypeFilter.addEventListener('change', filterData);
+        statusFilter.addEventListener('change', filterData);
+        balanceFilter.addEventListener('change', filterData);
+
+        // Pagination
+        prevPageBtn.addEventListener('click', function() {
+            if (currentPage > 1) {
+                currentPage--;
+                updateTable();
+            }
+        });
+
+        nextPageBtn.addEventListener('click', function() {
+            if (currentPage < Math.ceil(filteredData.length / rowsPerPage)) {
+                currentPage++;
+                updateTable();
+            }
+        });
+
+        // Reset filters
+        function resetFilters() {
+            searchInput.value = '';
+            accountTypeFilter.value = '';
+            statusFilter.value = '';
+            balanceFilter.value = '';
+            currentPage = 1;
+            filteredData = rows;
+            updateTable();
+        }
+
+        // Filter data based on search and filters
+        function filterData() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const accountType = accountTypeFilter.value.toLowerCase();
+            const status = statusFilter.value;
+            const balance = balanceFilter.value;
+
+            filteredData = rows.filter(row => {
+                const cells = row.querySelectorAll('td');
+                const holder = cells[0].textContent.toLowerCase();
+                const number = cells[1].textContent.toLowerCase();
+                const branch = cells[2].textContent.toLowerCase();
+                const type = cells[3].textContent.toLowerCase();
+                const mobile = cells[4].textContent.toLowerCase();
+                const balanceValue = parseFloat(cells[5].textContent.replace(/[^0-9.-]+/g,""));
+                const active = cells[6].textContent.toLowerCase() === 'active';
+
+                // Search term matching
+                const matchesSearch = holder.includes(searchTerm) ||
+                                     number.includes(searchTerm) ||
+                                     branch.includes(searchTerm) ||
+                                     mobile.includes(searchTerm);
+
+                // Account type filter
+                const matchesType = accountType === '' || type.includes(accountType);
+
+                // Status filter
+                const matchesStatus = status === '' ||
+                                    (status === 'true' && active) ||
+                                    (status === 'false' && !active);
+
+                // Balance filter
+                let matchesBalance = true;
+                if (balance === 'high') {
+                    // Find highest balance rows (top 10%)
+                    const allBalances = rows.map(r => parseFloat(r.querySelectorAll('td')[5].textContent.replace(/[^0-9.-]+/g,"")));
+                    const sortedBalances = [...allBalances].sort((a, b) => b - a);
+                    const threshold = sortedBalances[Math.floor(rows.length * 0.1)] || sortedBalances[0];
+                    matchesBalance = balanceValue >= threshold;
+                } else if (balance === 'low') {
+                    // Find lowest balance rows (bottom 10%)
+                    const allBalances = rows.map(r => parseFloat(r.querySelectorAll('td')[5].textContent.replace(/[^0-9.-]+/g,"")));
+                    const sortedBalances = [...allBalances].sort((a, b) => a - b);
+                    const threshold = sortedBalances[Math.floor(rows.length * 0.1)] || sortedBalances[0];
+                    matchesBalance = balanceValue <= threshold;
+                } else if (balance !== '') {
+                    matchesBalance = balanceValue >= parseFloat(balance);
+                }
+
+                return matchesSearch && matchesType && matchesStatus && matchesBalance;
+            });
+
+            // If sorting was applied, re-sort
+            if (currentSortColumn !== null) {
+                sortTable(currentSortColumn, currentSortDirection);
+            }
+
+            updateTable();
+        }
+
+        // Update table with pagination
+        function updateTable() {
+            const startIdx = (currentPage - 1) * rowsPerPage;
+            const endIdx = startIdx + rowsPerPage;
+            const paginatedData = filteredData.slice(startIdx, endIdx);
+
+            // Clear existing rows
+            tbody.innerHTML = '';
+
+            // Add filtered rows
+            paginatedData.forEach(row => {
+                tbody.appendChild(row.cloneNode(true));
+            });
+
+            // Update pagination info
+            showingFrom.textContent = startIdx + 1;
+            showingTo.textContent = Math.min(endIdx, filteredData.length);
+
+            // Update pagination controls
+            updatePagination();
+        }
+
+        // Update pagination buttons
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+
+            // Previous/next buttons
+            prevPageBtn.disabled = currentPage === 1;
+            nextPageBtn.disabled = currentPage === totalPages;
+
+            // Page numbers
+            paginationNumbers.innerHTML = '';
+
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+
+            if (startPage > 1) {
+                const firstBtn = document.createElement('button');
+                firstBtn.textContent = '1';
+                firstBtn.addEventListener('click', () => {
+                    currentPage = 1;
+                    updateTable();
+                });
+                paginationNumbers.appendChild(firstBtn);
+
+                if (startPage > 2) {
+                    const ellipsis = document.createElement('span');
+                    ellipsis.textContent = '...';
+                    ellipsis.style.padding = '0 0.5rem';
+                    paginationNumbers.appendChild(ellipsis);
+                }
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.textContent = i;
+                if (i === currentPage) {
+                    pageBtn.classList.add('active');
+                }
+                pageBtn.addEventListener('click', () => {
+                    currentPage = i;
+                    updateTable();
+                });
+                paginationNumbers.appendChild(pageBtn);
+            }
+
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    const ellipsis = document.createElement('span');
+                    ellipsis.textContent = '...';
+                    ellipsis.style.padding = '0 0.5rem';
+                    paginationNumbers.appendChild(ellipsis);
+                }
+
+                const lastBtn = document.createElement('button');
+                lastBtn.textContent = totalPages;
+                lastBtn.addEventListener('click', () => {
+                    currentPage = totalPages;
+                    updateTable();
+                });
+                paginationNumbers.appendChild(lastBtn);
+            }
+        }
+
+        // Setup sorting
+        function setupSorting() {
+            const headers = table.querySelectorAll('th[data-sort]');
+
+            headers.forEach(header => {
+                header.addEventListener('click', function() {
+                    const column = this.getAttribute('data-sort');
+                    const icon = this.querySelector('i');
+
+                    // Reset other headers
+                    headers.forEach(h => {
+                        if (h !== header) {
+                            h.querySelector('i').className = 'fas fa-sort';
+                        }
+                    });
+
+                    // Determine sort direction
+                    if (currentSortColumn === column) {
+                        currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
+                    } else {
+                        currentSortColumn = column;
+                        currentSortDirection = 'asc';
+                    }
+
+                    // Update icon
+                    icon.className = currentSortDirection === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down';
+
+                    // Sort table
+                    sortTable(column, currentSortDirection);
+                    updateTable();
+                });
+            });
+        }
+
+        // Sort table data
+        function sortTable(column, direction) {
+            const columnIndex = Array.from(table.querySelectorAll('th')).findIndex(th => th.getAttribute('data-sort') === column);
+
+            filteredData.sort((a, b) => {
+                const aCell = a.querySelectorAll('td')[columnIndex].textContent;
+                const bCell = b.querySelectorAll('td')[columnIndex].textContent;
+
+                // Special handling for balance (remove ₹ symbol)
+                if (column === 'balance') {
+                    const aValue = parseFloat(aCell.replace(/[^0-9.-]+/g,""));
+                    const bValue = parseFloat(bCell.replace(/[^0-9.-]+/g,""));
+                    return direction === 'asc' ? aValue - bValue : bValue - aValue;
+                }
+
+                // Special handling for dates
+                if (column === 'opened') {
+                    const aDate = new Date(aCell);
+                    const bDate = new Date(bCell);
+                    return direction === 'asc' ? aDate - bDate : bDate - aDate;
+                }
+
+                // Special handling for status (active comes first)
+                if (column === 'status') {
+                    const aActive = aCell === 'Active';
+                    const bActive = bCell === 'Active';
+                    if (aActive && !bActive) return direction === 'asc' ? -1 : 1;
+                    if (!aActive && bActive) return direction === 'asc' ? 1 : -1;
+                    return 0;
+                }
+
+                // Default string comparison
+                return direction === 'asc'
+                    ? aCell.localeCompare(bCell)
+                    : bCell.localeCompare(aCell);
+            });
+        }
+
+        // Export to Excel
+        function exportToExcel() {
+            const wb = XLSX.utils.book_new();
+            const wsData = [];
+
+            // Add headers
+            const headers = Array.from(table.querySelectorAll('th')).map(th => th.textContent.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim());
+            wsData.push(headers.slice(0, -1)); // Exclude actions column
+
+            // Add data
+            filteredData.forEach(row => {
+                const cells = Array.from(row.querySelectorAll('td'));
+                const rowData = cells.slice(0, -1).map(cell => cell.textContent); // Exclude actions column
+                wsData.push(rowData);
+            });
+
+            const ws = XLSX.utils.aoa_to_sheet(wsData);
+            XLSX.utils.book_append_sheet(wb, ws, "Accounts");
+            XLSX.writeFile(wb, "BankAccounts.xlsx");
+        }
+
+        // Export to PDF
+        function exportToPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Title
+            doc.setFontSize(18);
+            doc.text('Bank Account List', 14, 15);
+
+            // Date
+            doc.setFontSize(10);
+            doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 22);
+
+            // Table data
+            const headers = Array.from(table.querySelectorAll('th')).map(th =>
+                th.textContent.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim()
+            ).slice(0, -1); // Exclude actions column
+
+            const data = filteredData.map(row => {
+                const cells = Array.from(row.querySelectorAll('td'));
+                return cells.slice(0, -1).map(cell => cell.textContent); // Exclude actions column
+            });
+
+            // AutoTable
+            doc.autoTable({
+                head: [headers],
+                body: data,
+                startY: 30,
+                styles: {
+                    fontSize: 8,
+                    cellPadding: 2,
+                    overflow: 'linebreak'
+                },
+                headStyles: {
+                    fillColor: [67, 97, 238],
+                    textColor: 255,
+                    fontStyle: 'bold'
+                },
+                alternateRowStyles: {
+                    fillColor: [240, 240, 240]
+                },
+                columnStyles: {
+                    5: { cellWidth: 'auto' } // Balance column
+                }
+            });
+
+            // Save
+            doc.save('BankAccounts.pdf');
+        }
+    </script>

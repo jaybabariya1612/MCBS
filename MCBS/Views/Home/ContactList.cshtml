@@ -1,0 +1,47 @@
+﻿<link href="~/css/ContactList.css" rel="stylesheet" />
+@model List<ContactUsModel>
+<div class="contact-list-container">
+    <div class="contact-list-header">
+        <h2>Contact List</h2>
+        <p>Manage all your contact submissions in one place</p>
+    </div>
+
+    <div class="table-responsive">
+        <table class="contact-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Subject</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var contact in Model)
+                {
+                    <tr>
+                        <td data-label="Name">@contact.FullName</td>
+                        <td data-label="Email">@contact.Email</td>
+                        <td data-label="Mobile">@contact.MobileNumber</td>
+                        <td data-label="Subject">@contact.Subject</td>
+                        <td data-label="Actions" class="actions">
+                            <a asp-action="EditContact" asp-route-id="@contact.ContactId" class="btn-action btn-edit">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <a asp-action="ContactDetail" asp-route-id="@contact.ContactId" class="btn-action btn-detail">
+                                <i class="fas fa-eye"></i> Detail
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+}

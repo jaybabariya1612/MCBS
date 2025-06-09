@@ -1,0 +1,213 @@
+﻿:root {
+    --primary-color: #0056b3;
+    --secondary-color: #003366;
+    --accent-color: #00a8e8;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+}
+
+/* Animation Classes */
+.fade-in {
+    opacity: 0;
+}
+
+.slide-up {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.float {
+    animation: floating 3s ease-in-out infinite;
+}
+
+.float-delay-1 {
+    animation: floating 3s ease-in-out infinite 0.5s;
+}
+
+.float-delay-2 {
+    animation: floating 3s ease-in-out infinite 1s;
+}
+
+.float-delay-3 {
+    animation: floating 3s ease-in-out infinite 1.5s;
+}
+
+.float-delay-4 {
+    animation: floating 3s ease-in-out infinite 2s;
+}
+
+@keyframes floating {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Custom Styles */
+.hero-section {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+.currency-note {
+    position: absolute;
+    opacity: 0.8;
+    z-index: 1;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+.banking-app-overlay {
+    background: rgba(0, 86, 179, 0.03);
+    pointer-events: none;
+}
+
+.stat-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        border-color: var(--accent-color);
+    }
+
+.icon-lg {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-sm {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.account-card {
+    transition: all 0.3s ease;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+    .account-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .account-card .card-header {
+        position: relative;
+    }
+
+    .account-card .badge {
+        position: absolute;
+        top: -10px;
+        right: 15px;
+    }
+
+.loan-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+
+    .loan-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        border-color: var(--accent-color);
+    }
+
+.testimonial-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+    .testimonial-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        border-color: var(--accent-color);
+    }
+
+.news-card {
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+    .news-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .news-card .card-img-top {
+        transition: transform 0.5s ease;
+        height: 180px;
+        object-fit: cover;
+    }
+
+    .news-card:hover .card-img-top {
+        transform: scale(1.05);
+    }
+
+.cta-section {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-accent {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+}
+
+    .btn-accent:hover {
+        background-color: #0095d9;
+        color: white;
+    }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .hero-section .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .hero-section .d-flex {
+        flex-direction: column;
+    }
+}

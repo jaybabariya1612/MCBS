@@ -1,0 +1,288 @@
+﻿<link href="~/css/AccountEdit.css" rel="stylesheet" />
+@model MCBS.Models.AccountModel
+
+@{
+    ViewData["Title"] = "Edit Account Details";
+}
+<div class="account-edit-container">
+    <div class="edit-header">
+        <h2><i class="fas fa-user-edit"></i> Edit Account Details</h2>
+        <div class="account-badge">
+            <span class="account-number">@Model.AccountNumber</span>
+            <span class="account-status @(Model.IsActive ? "active" : "inactive")">
+                @(Model.IsActive ? "Active" : "Inactive")
+            </span>
+        </div>
+    </div>
+
+    <form asp-action="AccountEdit" method="post" class="edit-form">
+        <input type="hidden" asp-for="AccountId" />
+
+        <div class="form-grid">
+            <!-- Personal Information Section -->
+            <div class="form-section personal-info">
+                <div class="section-header">
+                    <i class="fas fa-user-tie"></i>
+                    <h3>Personal Information</h3>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AccountHolderName" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        <input asp-for="AccountHolderName" class="form-control" />
+                    </div>
+                    <span asp-validation-for="AccountHolderName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="DateOfBirth" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                        <input asp-for="DateOfBirth" type="date" class="form-control" />
+                    </div>
+                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Gender" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-venus-mars"></i></span>
+                        <select asp-for="Gender" class="form-select">
+                            <option value="">Select Gender</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Occupation" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                        <input asp-for="Occupation" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Nationality" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-globe"></i></span>
+                        <input asp-for="Nationality" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Information Section -->
+            <div class="form-section account-info">
+                <div class="section-header">
+                    <i class="fas fa-university"></i>
+                    <h3>Account Information</h3>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AccountNumber" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
+                        <input asp-for="AccountNumber" class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="AccountType" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-piggy-bank"></i></span>
+                        <select asp-for="AccountType" class="form-select">
+                            <option>Savings</option>
+                            <option>Current</option>
+                            <option>Fixed Deposit</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="BranchName" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-building"></i></span>
+                        <input asp-for="BranchName" class="form-control" />
+                    </div>
+                    <span asp-validation-for="BranchName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="IFSCCode" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-code"></i></span>
+                        <input asp-for="IFSCCode" class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Balance" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-rupee-sign"></i></span>
+                        <input asp-for="Balance" type="number" step="0.01" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="DateOfOpening" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-calendar-check"></i></span>
+                        <input asp-for="DateOfOpening" type="date" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Information Section -->
+            <div class="form-section contact-info">
+                <div class="section-header">
+                    <i class="fas fa-address-book"></i>
+                    <h3>Contact Information</h3>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MobileNumber" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
+                        <input asp-for="MobileNumber" class="form-control" />
+                    </div>
+                    <span asp-validation-for="MobileNumber" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        <input asp-for="Email" type="email" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Address" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-home"></i></span>
+                        <textarea asp-for="Address" class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="City" class="form-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-city"></i></span>
+                            <input asp-for="City" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label asp-for="State" class="form-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-map-marked-alt"></i></span>
+                            <input asp-for="State" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PostalCode" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-mail-bulk"></i></span>
+                        <input asp-for="PostalCode" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document & Nominee Information Section -->
+            <div class="form-section document-info">
+                <div class="section-header">
+                    <i class="fas fa-id-card"></i>
+                    <h3>Document Information</h3>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AadhaarNumber" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                        <input asp-for="AadhaarNumber" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PANNumber" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                        <input asp-for="PANNumber" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="section-header mt-4">
+                    <i class="fas fa-users"></i>
+                    <h3>Nominee Information</h3>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NomineeName" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-user-friends"></i></span>
+                        <input asp-for="NomineeName" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="NomineeRelationship" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-heart"></i></span>
+                        <input asp-for="NomineeRelationship" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="section-header mt-4">
+                    <i class="fas fa-cog"></i>
+                    <h3>Account Settings</h3>
+                </div>
+                <div class="form-group">
+                    <div class="form-check form-switch">
+                        <input asp-for="IsActive" class="form-check-input" type="checkbox" role="switch">
+                        <label asp-for="IsActive" class="form-check-label">Account Active</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-check form-switch">
+                        <input asp-for="KYCStatus" class="form-check-input" type="checkbox" role="switch">
+                        <label asp-for="KYCStatus" class="form-check-label">KYC Verified</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="AccountStatusReason" class="form-label"></label>
+                    <input asp-for="AccountStatusReason" class="form-control" placeholder="Reason for status change" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="LastUpdated" class="form-label"></label>
+                    <input asp-for="LastUpdated" type="datetime-local" class="form-control" readonly />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-save">
+                <i class="fas fa-save"></i> Save Changes
+            </button>
+            <a asp-action="AccountList" class="btn btn-cancel">
+                <i class="fas fa-times"></i> Cancel
+            </a>
+        </div>
+    </form>
+</div>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Set current datetime for LastUpdated field
+        document.addEventListener('DOMContentLoaded', function() {
+            const now = new Date();
+            const timezoneOffset = now.getTimezoneOffset() * 60000;
+            const localISOTime = new Date(now - timezoneOffset).toISOString().slice(0, 16);
+            document.getElementById('LastUpdated').value = localISOTime;
+        });
+    </script>

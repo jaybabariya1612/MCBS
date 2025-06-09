@@ -1,0 +1,179 @@
+﻿<link href="~/css/AccountDetail.css" rel="stylesheet" />
+@model MCBS.Models.AccountModel
+
+    <div class="account-details-container">
+    <div class="account-header">
+        <div class="header-content">
+            <h2><i class="fas fa-user-circle"></i> Account Details</h2>
+            <div class="account-status-badge @(Model.IsActive ? "active" : "inactive")">
+                @(Model.IsActive ? "Active" : "Inactive")
+            </div>
+        </div>
+    </div>
+
+    <div class="account-summary-cards">
+        <div class="summary-card balance-card">
+            <div class="card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="var(--success-color)">
+                    <path d="M13.66 7c-.56-1.18-1.76-2-3.16-2H6V3h12v2h-3.26c.48.58.84 1.26 1.05 2H18v2h-2.02c-.25 2.8-2.61 5-5.48 5h-.73l6.73 7h-2.77L7 14v-2h3.5c1.76 0 3.22-1.3 3.46-3H6V7h7.66z" />
+                </svg>
+            </div>
+            <div class="card-content">
+                <h3>Current Balance</h3>
+                <p>₹@Model.Balance.ToString("N2")</p>
+            </div>
+        </div>
+
+        <div class="summary-card account-card">
+            <div class="card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="var(--primary-color)">
+                    <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z" />
+                </svg>
+            </div>
+            <div class="card-content">
+                <h3>Account Type</h3>
+                <p>@Model.AccountType</p>
+            </div>
+        </div>
+
+        <div class="summary-card kyc-card">
+            <div class="card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="var(--success-color)">
+                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11V11.99z" />
+                </svg>
+            </div>
+            <div class="card-content">
+                <h3>KYC Status</h3>
+                <p class="@(Model.KYCStatus ? "text-success" : "text-warning")">@(Model.KYCStatus ? "Verified" : "Pending")</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="account-details-grid">
+        <div class="details-section personal-info">
+            <h3><i class="fas fa-user-tie"></i> Personal Information</h3>
+            <div class="details-content">
+                <div class="detail-item">
+                    <span class="detail-label">Full Name</span>
+                    <span class="detail-value">@Model.AccountHolderName</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Date of Birth</span>
+                    <span class="detail-value">@Model.DateOfBirth?.ToString("dd MMM yyyy")</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Gender</span>
+                    <span class="detail-value">@Model.Gender</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Occupation</span>
+                    <span class="detail-value">@Model.Occupation</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Nationality</span>
+                    <span class="detail-value">@Model.Nationality</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="details-section account-info">
+            <h3><i class="fas fa-university"></i> Account Information</h3>
+            <div class="details-content">
+                <div class="detail-item">
+                    <span class="detail-label">Account Number</span>
+                    <span class="detail-value">@Model.AccountNumber</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Account Type</span>
+                    <span class="detail-value">@Model.AccountType</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Date of Opening</span>
+                    <span class="detail-value">@Model.DateOfOpening.ToString("dd MMM yyyy")</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Branch</span>
+                    <span class="detail-value">@Model.BranchName</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">IFSC Code</span>
+                    <span class="detail-value">@Model.IFSCCode</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="details-section contact-info">
+            <h3><i class="fas fa-address-book"></i> Contact Information</h3>
+            <div class="details-content">
+                <div class="detail-item">
+                    <span class="detail-label">Mobile</span>
+                    <span class="detail-value">@Model.MobileNumber</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Email</span>
+                    <span class="detail-value">@Model.Email</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Address</span>
+                    <span class="detail-value">@Model.Address</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">City</span>
+                    <span class="detail-value">@Model.City</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">State</span>
+                    <span class="detail-value">@Model.State</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Postal Code</span>
+                    <span class="detail-value">@Model.PostalCode</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="details-section document-info">
+            <h3><i class="fas fa-id-card"></i> Document Information</h3>
+            <div class="details-content">
+                <div class="detail-item">
+                    <span class="detail-label">Aadhaar Number</span>
+                    <span class="detail-value">@Model.AadhaarNumber</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">PAN Number</span>
+                    <span class="detail-value">@Model.PANNumber</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="details-section nominee-info">
+            <h3><i class="fas fa-users"></i> Nominee Information</h3>
+            <div class="details-content">
+                <div class="detail-item">
+                    <span class="detail-label">Nominee Name</span>
+                    <span class="detail-value">@Model.NomineeName</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Relationship</span>
+                    <span class="detail-value">@Model.NomineeRelationship</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="details-section status-info">
+            <h3><i class="fas fa-info-circle"></i> Status Information</h3>
+            <div class="details-content">
+                <div class="detail-item">
+                    <span class="detail-label">Account Status</span>
+                    <span class="detail-value @(Model.IsActive ? "text-success" : "text-danger")">
+                        @(Model.IsActive ? "Active" : "Inactive")
+                    </span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Status Reason</span>
+                    <span class="detail-value">@Model.AccountStatusReason</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

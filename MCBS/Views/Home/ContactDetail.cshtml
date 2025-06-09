@@ -1,0 +1,59 @@
+﻿@model ContactUsModel
+@{
+    ViewBag.Title = "Contact Message Details";
+}
+<link href="~/css/ContactDetail.css" rel="stylesheet" />
+<div class="contact-detail-container">
+    <div class="contact-detail-header">
+        <h2>Contact Message Details</h2>
+        <p>View the complete details of this contact message</p>
+    </div>
+
+    <div class="contact-detail-card">
+        <div class="detail-item">
+            <div class="detail-label">
+                <i class="fas fa-user"></i> Full Name
+            </div>
+            <div class="detail-value">@Model.FullName</div>
+        </div>
+
+        <div class="detail-item">
+            <div class="detail-label">
+                <i class="fas fa-envelope"></i> Email
+            </div>
+            <div class="detail-value">@Model.Email</div>
+        </div>
+
+        <div class="detail-item">
+            <div class="detail-label">
+                <i class="fas fa-phone"></i> Mobile Number
+            </div>
+            <div class="detail-value">@Model.MobileNumber</div>
+        </div>
+
+        <div class="detail-item">
+            <div class="detail-label">
+                <i class="fas fa-tag"></i> Subject
+            </div>
+            <div class="detail-value">@Model.Subject</div>
+        </div>
+
+        <div class="detail-item">
+            <div class="detail-label">
+                <i class="fas fa-comment"></i> Message
+            </div>
+            <div class="detail-value message-content">@Model.Message</div>
+        </div>
+
+        <div class="detail-actions">
+            <a asp-action="ContactList" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+}

@@ -1,0 +1,194 @@
+﻿:root {
+    --primary-color: #0056b3;
+    --secondary-color: #003366;
+    --accent-color: #00a8e8;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --transition: all 0.3s ease;
+}
+
+.account-details-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.account-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+    box-shadow: var(--box-shadow);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.account-header h2 {
+    margin: 0;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.account-status-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+    .account-status-badge.active {
+        background-color: rgba(0, 168, 232, 0.2);
+        color: var(--accent-color);
+        border: 1px solid var(--accent-color);
+    }
+
+    .account-status-badge.inactive {
+        background-color: rgba(52, 58, 64, 0.2);
+        color: var(--dark-color);
+        border: 1px solid var(--dark-color);
+    }
+
+.account-summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.summary-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+    .summary-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+.card-icon svg {
+    width: 48px;
+    height: 48px;
+}
+
+.card-content h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--dark-color);
+    opacity: 0.8;
+}
+
+.card-content p {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.balance-card {
+    border-left: 4px solid var(--accent-color);
+}
+
+.account-card {
+    border-left: 4px solid var(--primary-color);
+}
+
+.kyc-card {
+    border-left: 4px solid var(--primary-color);
+}
+
+.account-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.details-section {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+}
+
+    .details-section h3 {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        margin: 0;
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+.details-content {
+    padding: 1.5rem;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+    .detail-item:last-child {
+        border-bottom: none;
+    }
+
+.detail-label {
+    font-weight: 500;
+    color: var(--dark-color);
+    opacity: 0.7;
+}
+
+.detail-value {
+    font-weight: 500;
+    color: var(--dark-color);
+    text-align: right;
+}
+
+.text-success {
+    color: var(--accent-color) !important;
+}
+
+.text-danger {
+    color: var(--dark-color) !important;
+}
+
+.text-warning {
+    color: var(--secondary-color) !important;
+}
+
+.text-info {
+    color: var(--primary-color) !important;
+}
+
+@media (max-width: 768px) {
+    .account-summary-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .account-details-grid {
+        grid-template-columns: 1fr;
+    }
+}
