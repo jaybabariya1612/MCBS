@@ -1,7 +1,6 @@
+Sure! Here's a full polished **README.md** for your **MCBS - Modern Core Banking System** project, with properly formatted sections including the fixed folder structure and everything else you provided:
 
----
-
-```markdown
+````markdown
 # 💼 MCBS - Modern Core Banking System
 
 > A secure and feature-rich banking application developed using **ASP.NET Core MVC**, designed to manage customer accounts, perform transactions, and handle banking operations in a modern web interface.
@@ -41,16 +40,15 @@
 |-------------|---------------------------|
 | Backend     | ASP.NET Core 6.0 MVC      |
 | Frontend    | Razor Views, Bootstrap 5  |
-| Database    | SQL Server (SP-based)     |
+| Database    | SQL Server (Stored Procedures) |
 | Auth        | Session-based             |
 | Tools Used  | Visual Studio, Git        |
 
 ---
 
 ## 🗂️ Folder Structure
-<pre>
-```
 
+```plaintext
 MCBS/
 │
 ├── Controllers/                # Contains all MVC controller logic
@@ -87,31 +85,32 @@ MCBS/
 ├── Program.cs                  # Application startup
 ├── MCBS.csproj                 # Project file
 ├── MCBS.sln                    # Visual Studio solution file
-└── ...       # Project file
-
+└── ...
 ````
-</pre>
+
 ---
 
 ## 🛠️ Setup Instructions
 
 ### Prerequisites
-- ✅ .NET 6.0 SDK
-- ✅ SQL Server
-- ✅ Visual Studio 2022+
+
+* ✅ .NET 6.0 SDK
+* ✅ SQL Server
+* ✅ Visual Studio 2022+
 
 ### Steps
 
 1. **Clone the repository**:
+
    ```bash
    git clone https://github.com/jaybabariya1612/MCBS.git
    cd MCBS
-````
+   ```
 
-2. **Configure DB**:
+2. **Configure Database**:
 
-   * Update `appsettings.json` with your SQL connection string
-   * Run the provided SQL scripts to initialize tables (`IndianBankAccount`, `TransactionHistories`, etc.)
+   * Update the connection string in `appsettings.json` to point to your SQL Server instance.
+   * Run the provided SQL scripts to create and seed tables like `IndianBankAccount`, `TransactionHistories`, `BankContactUs`, `tbl_Register`, etc.
 
 3. **Run the project**:
 
@@ -119,7 +118,11 @@ MCBS/
    dotnet run
    ```
 
-4. Open in browser: `https://localhost:7159/`
+4. **Open your browser and navigate to**:
+
+   ```
+   https://localhost:7159/
+   ```
 
 ---
 
@@ -138,22 +141,22 @@ MCBS/
 
 ### Create Account
 
-> `/Account/Account`
+> URL: `/Account/Account`
 > Admin can add new accounts. System auto-generates account number & IFSC.
 
 ### Login & Dashboard
 
-> `/Login/Login`
+> URL: `/Login/Login`
 > Customers log in using account number and DOB.
 
 ### Send Money
 
-> `/Transaction/SendMoney`
+> URL: `/Transaction/SendMoney`
 > Transfer funds securely, requires DOB validation.
 
 ### Contact Us
 
-> `/Home/ContactUs`
+> URL: `/Home/ContactUs`
 > Users submit queries; admins manage responses.
 
 ---
@@ -162,9 +165,9 @@ MCBS/
 
 * Secure session-based login
 * DOB PIN verification for transactions
-* Parameterized SQL queries
-* Validations to avoid duplicates
-* Transaction rollback on failure
+* Parameterized SQL queries to prevent injection
+* Validations to avoid duplicate entries (Aadhaar, PAN, Mobile)
+* Transaction rollback on failure to ensure data integrity
 
 ---
 
@@ -181,12 +184,14 @@ MCBS/
 
 ## 📸 Screenshots
 
-> *You can showcase screenshots of:*
+*You can showcase screenshots of:*
 
 * ✨ Dashboard view
 * 📊 Transaction page
 * 📝 Account form
 * 🔐 Login screen
+
+*(Add your images in the repository and link here)*
 
 ---
 
@@ -198,7 +203,7 @@ Licensed under the [MIT License](LICENSE)
 
 ## 🤝 Contributing
 
-We welcome PRs and improvements. If you plan significant changes, please open an issue to discuss first.
+Contributions are welcome! If you plan significant changes, please open an issue to discuss before submitting a pull request.
 
 ---
 
@@ -206,6 +211,6 @@ We welcome PRs and improvements. If you plan significant changes, please open an
 
 Created by **Jay Babariya**
 📧 Email: `jaybabariya01@gmail.com`
-🔗 [GitHub](https://github.com/jaybabariya1612)
+🔗 [GitHub Profile](https://github.com/jaybabariya1612)
 
 ---
