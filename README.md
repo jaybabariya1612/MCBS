@@ -191,8 +191,6 @@ MCBS/
 * 📝 Account form
 * 🔐 Login screen
 
-*(Add your images in the repository and link here)*
-
 ---
 
 ## 📄 License
